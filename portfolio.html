@@ -1,35 +1,133 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta viewport="width=device-width, initial-scale=1.0">
-<title>แฟมสะสมงานของฉัน  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แฟ้มสะสมผลงานของฉัน</title>
 <style>
-body { font-family: sans-serif; background-color: #0A0A0A; text-align: center;
-padding: 30px; }
-.container { max-width: 800px; margin: 0 auto; }
-.project-card { background:skyblue; padding: 20px; margin: 20px 0; border-radius:
-8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: left; }
-.btn { display: inline-block; background: #2c3e50; color: white; padding: 10px
-20px; text-decoration: none; border-radius: 5px; margin-top: 20px; }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+body{
+background:linear-gradient(-45deg,#05030d,#12081f,#2d0b52,#6d28d9);
+background-size:400% 400%;
+animation:bgmove 15s ease infinite;
+color:white;
+padding:40px;
+overflow-x:hidden;
+}
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+.container{
+max-width:900px;
+margin:auto;
+animation:fadeUp 1s;
+}
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+h1{
+font-size:45px;
+text-align:center;
+color:#d8b4fe;
+margin-bottom:15px;
+}
+.subtitle{
+text-align:center;
+font-size:20px;
+margin-bottom:40px;
+color:#dddddd;
+}
+.project-card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.15);
+padding:30px;
+margin:25px 0;
+border-radius:20px;
+transition:.4s;
+box-shadow:0 0 20px rgba(147,51,234,.25);
+}
+.project-card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 35px rgba(192,132,252,.5);
+}
+.project-card h3{
+color:#c084fc;
+margin-bottom:12px;
+}
+.project-card p{
+line-height:1.8;
+color:#eeeeee;
+}
+.btn{
+display:inline-block;
+margin-top:35px;
+padding:14px 30px;
+background:linear-gradient(90deg,#6d28d9,#9333ea);
+color:white;
+text-decoration:none;
+border-radius:50px;
+transition:.3s;
+font-weight:bold;
+}
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 25px #9333ea;
+}
+.footer{
+text-align:center;
+margin-top:60px;
+color:#c4b5fd;
+font-size:15px;
+}
 </style>
 </head>
 <body>
 <div class="container">
-<h1> แฟมสะสมงาน ้ (Portfolio)</h1>
-<p>นี่คือพื้นที่รวบรวมผลงานและกิจกรรมที่ภูมิใจครับ</p>
-<!-- กล่องผลงานชนที่ ้ิ 1 -->
+<h1>📂 แฟ้มสะสมผลงาน</h1>
+<p class="subtitle">
+พื้นที่รวบรวมผลงาน กิจกรรม และความภาคภูมิใจของผม
+</p>
 <div class="project-card">
-<h3>1. โครงงาน/ชนงานวิทยาศาสตร์ค;านวณ ิ้ </h3>
-<p>รายละเอียดชนงาน ิ้ : เขียนอธิบายสันๆ ว่าท;าอะไร ได้เรียนรู้อะไรจากงานนี้บ้าง ้ </p>
+<h3>🔬 1. โครงงานวิทยาศาสตร์และการคำนวณ</h3>
+<p>
+ศึกษาการแก้ปัญหาโดยใช้กระบวนการทางวิทยาศาสตร์และการเขียนโปรแกรม
+พร้อมฝึกการคิดวิเคราะห์ การทำงานเป็นทีม และการนำเสนอผลงาน
+</p>
 </div>
-<!-- กล่องผลงานชนที่ ้ิ 2 -->
 <div class="project-card">
-<h3>2. กิจกรรม/เกียรติบัตรที่ได้รับ</h3>
-<p>รายละเอียดชนงาน ิ้ : เข้าร่วมการประกวด หรือกิจกรรมของโรงเรียน...</p>
+<h3>🏆 2. กิจกรรมและเกียรติบัตร</h3>
+<p>
+เข้าร่วมการแข่งขัน กิจกรรมทางวิชาการ ค่ายวิทยาศาสตร์
+และได้รับเกียรติบัตรจากการเข้าร่วมกิจกรรมของโรงเรียนและหน่วยงานต่าง ๆ
+</p>
 </div>
-<!-- ปุ่มกดกลับหน้าแรก -->
-<a href="index.html" class="btn"> กลับหน้าแรก</a>
+<div class="project-card">
+<h3>💻 3. ทักษะที่สนใจ</h3>
+<p>
+HTML • CSS • JavaScript • Python
+<br>
+การแพทย์ • เภสัชศาสตร์ • วิทยาศาสตร์ • เทคโนโลยี
+</p>
 </div>
-</body>
-</html>
+<div style="text-align:center;">
+<a href="index.html" class="btn">
+⬅ กลับหน้าแรก
+</a>
+</div>
+<d
