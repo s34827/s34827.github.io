@@ -1,31 +1,117 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>หน้าแนะนำตัวของซูปเปอร์ค้าฟ</title>
 <style>
-body {
-background-color: #343434; color: #333;
-text-align: center; padding: 50px;
-
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
-.card {
-background: skyblue; border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-max-width: 500px; margin: 0 auto; padding: 30px;
-
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#05030d,#160826,#38105d,#6d28d9);
+background-size:400% 400%;
+animation:bgmove 12s ease infinite;
+overflow:hidden;
 }
-h1 { color: #000000; }
-p { font-size: 18px; line-height: 1.6; }
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+.card{
+width:420px;
+padding:40px;
+text-align:center;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:25px;
+box-shadow:0 0 30px rgba(153,51,255,.35);
+animation:fadeUp 1s;
+color:white;
+}
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+h1{
+color:#d8b4fe;
+margin-bottom:20px;
+font-size:34px;
+}
+p{
+font-size:18px;
+line-height:1.8;
+margin:12px 0;
+color:#eeeeee;
+}
+strong{
+color:#c084fc;
+}
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:14px 30px;
+text-decoration:none;
+background:linear-gradient(90deg,#6d28d9,#9333ea);
+color:white;
+border-radius:50px;
+transition:.3s;
+font-weight:bold;
+box-shadow:0 0 20px rgba(147,51,234,.5);
+}
+.btn:hover{
+transform:translateY(-5px) scale(1.05);
+box-shadow:0 0 35px rgba(192,132,252,.8);
+}
+.circle{
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
+animation:float 8s ease-in-out infinite;
+}
+.c1{
+width:180px;
+height:180px;
+top:10%;
+left:10%;
+}
+.c2{
+width:130px;
+height:130px;
+bottom:12%;
+right:12%;
+animation-delay:2s;
+}
+@keyframes float{
+50%{
+transform:translateY(-25px);
+}
+}
 </style>
 </head>
 <body>
+<div class="circle c1"></div>
+<div class="circle c2"></div>
 <div class="card">
-<h1>ยินดีต้อนรับสู่โปรไฟล์ของซุปเปอร์ค้าฟ </h1>
+<h1>ยินดีต้อนรับสู่โปรไฟล์ของซูปเปอร์ค้าฟ</h1>
 <p>สวัสดีครับ! ผมชื่อ <strong>ณัฐนันท์ (Nattanan)</strong></p>
-<p>ขณะนี้กำลังศึกษาอยู่แผนการเรียน วิทย์-คณิต Gifted /สนใจด้าน การแพทย์ หรือ กระบวนการทางวิทยาศาสตร์ </p>
-<p>นี่คือเว็บไซต์แรกของผมที่สร้างบน GitHub Pages!</p>
- <a href="portfolio.html" class="btn"> ไปหน้าต่อไป</a>
-</div>
-</body>
-</html>
+<p>กำลังศึกษาอยู่แผนการเรียน <strong>วิทย์–คณิต Gifted</strong></p>
+<p>สนใจด้านการแพทย์ เภสัชศาสตร์ และกระบวนการทางวิทยาศาสตร์</p>
+<p>นี่คือเว็บไซต์แรกของผมที่สร้างบน GitHub
