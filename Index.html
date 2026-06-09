@@ -1,1 +1,113 @@
+48173”}
 
+/* =========================
+   BLACK PURPLE THEME
+========================= */
+body{
+    background:#05030d;
+    color:#ffffff;
+}
+/* Animated Background */
+.background{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(
+        -45deg,
+        #05030d,
+        #12081f,
+        #2d0b52,
+        #5b21b6,
+        #2d0b52,
+        #05030d
+    );
+    background-size:400% 400%;
+    animation:bgmove 15s ease infinite;
+    z-index:-5;
+}
+@keyframes bgmove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+/* Glass Card */
+.card{
+    background:rgba(120,40,255,.12);
+    border:1px solid rgba(180,120,255,.2);
+    backdrop-filter:blur(18px);
+    box-shadow:
+    0 0 20px rgba(128,0,255,.2);
+    border-radius:20px;
+    transition:.4s;
+}
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:
+    0 0 30px rgba(180,0,255,.45);
+}
+/* Button */
+button{
+    background:linear-gradient(
+    90deg,
+    #6d28d9,
+    #9333ea
+    );
+    color:white;
+    border:none;
+    border-radius:50px;
+    padding:14px 28px;
+    transition:.3s;
+}
+button:hover{
+    transform:scale(1.05);
+    box-shadow:
+    0 0 25px #9333ea;
+}
+/* Navigation */
+nav{
+    background:rgba(0,0,0,.4);
+    backdrop-filter:blur(12px);
+}
+nav a{
+    color:#ffffff;
+    text-decoration:none;
+}
+nav a:hover{
+    color:#c084fc;
+}
+/* Heading */
+h1,h2,h3{
+    color:#d8b4fe;
+    text-shadow:
+    0 0 15px rgba(168,85,247,.5);
+}
+/* Back To Top */
+#topBtn{
+    background:#7e22ce;
+    color:white;
+    box-shadow:
+    0 0 15px #9333ea;
+}
+#topBtn:hover{
+    background:#9333ea;
+    transform:scale(1.1);
+}
+/* Footer */
+footer{
+    background:#09040f;
+    border-top:1px solid rgba(180,120,255,.2);
+    color:#c4b5fd;
+}
+/* Custom Cursor */
+.cursor{
+    border:2px solid #a855f7;
+    box-shadow:
+    0 0 15px #9333ea,
+    0 0 30px #6d28d9;
+}
+/* Loading */
+#loader{
+    background:#05030d;
+}
+.loader-circle{
+    border:8px solid rgba(255,255,255,.1);
+    border-top:8px solid #a855f7;
