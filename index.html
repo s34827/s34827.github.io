@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>หน้าแนะนำตัวของซูปเปอร์ค้าฟ</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Sans+Thai:wght@400;500;700&display=swap');
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
 }
 body{
     height:100vh;
@@ -17,159 +18,161 @@ body{
     justify-content:center;
     align-items:center;
     overflow:hidden;
+    font-family:'Noto Sans Thai', sans-serif;
     background:
-    radial-gradient(circle at 20% 20%, rgba(168,85,247,.35), transparent 30%),
-    radial-gradient(circle at 80% 30%, rgba(147,51,234,.30), transparent 35%),
-    radial-gradient(circle at 50% 80%, rgba(109,40,217,.30), transparent 30%),
-    linear-gradient(135deg,#05030d,#12081f,#2d0b52,#05030d);
+        radial-gradient(circle at 18% 18%, rgba(212,175,55,.22), transparent 28%),
+        radial-gradient(circle at 82% 28%, rgba(184,134,11,.18), transparent 32%),
+        radial-gradient(circle at 50% 88%, rgba(255,215,0,.10), transparent 30%),
+        linear-gradient(145deg,#0b0904,#161208,#2a2110,#0b0904);
     background-size:400% 400%;
-    animation:bgMove 15s ease infinite;
+    animation:bgMove 18s ease infinite;
+    color:#f8f1d8;
 }
-/* พื้นหลังเคลื่อนไหว */
 @keyframes bgMove{
-0%{
-background-position:0% 50%;
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
 }
-50%{
-background-position:100% 50%;
-}
-100%{
-background-position:0% 50%;
-}
-}
-/* ดาว */
 .stars{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-background-image:
-radial-gradient(white 1px, transparent 1px),
-radial-gradient(#c084fc 1px, transparent 1px);
-background-size:60px 60px,100px 100px;
-opacity:.7;
-animation:starMove 35s linear infinite;
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+        radial-gradient(#ffe9a3 1px, transparent 1px),
+        radial-gradient(#d4af37 1px, transparent 1px);
+    background-size:70px 70px, 110px 110px;
+    opacity:.55;
+    animation:starMove 40s linear infinite;
 }
 @keyframes starMove{
-from{
-transform:translateY(0);
+    from{ transform:translateY(0); }
+    to{ transform:translateY(-260px); }
 }
-to{
-transform:translateY(-250px);
+.molecules{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.7;
 }
-}
-/* วงกลม Glass */
 .circle{
-position:absolute;
-border-radius:50%;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(20px);
-animation:float 8s ease-in-out infinite;
+    position:absolute;
+    border-radius:50%;
+    background:rgba(212,175,55,.08);
+    border:1px solid rgba(255,215,0,.18);
+    backdrop-filter:blur(18px);
+    animation:float 8s ease-in-out infinite;
 }
-.c1{
-width:220px;
-height:220px;
-top:8%;
-left:8%;
-}
-.c2{
-width:150px;
-height:150px;
-bottom:10%;
-right:10%;
-animation-delay:2s;
-}
+.c1{ width:240px; height:240px; top:7%; left:7%; }
+.c2{ width:160px; height:160px; bottom:8%; right:8%; animation-delay:2s; }
+.c3{ width:90px; height:90px; top:18%; right:16%; animation-delay:4s; }
 @keyframes float{
-50%{
-transform:translateY(-25px);
+    50%{ transform:translateY(-22px); }
 }
+.wrap{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
-/* การ์ด */
+.badge{
+    margin-bottom:16px;
+    padding:7px 16px;
+    border-radius:999px;
+    border:1px solid rgba(212,175,55,.45);
+    background:rgba(20,16,8,.55);
+    color:#f3d58a;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
 .card{
-width:450px;
-padding:45px;
-text-align:center;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.15);
-border-radius:25px;
-box-shadow:
-0 0 25px rgba(147,51,234,.35),
-0 0 60px rgba(109,40,217,.2);
-animation:fadeUp 1s;
-color:white;
+    width:min(460px, 92vw);
+    padding:46px 40px 36px;
+    text-align:center;
+    background:linear-gradient(180deg, rgba(40,32,14,.55), rgba(16,13,6,.72));
+    backdrop-filter:blur(22px);
+    border:1px solid rgba(232,197,91,.35);
+    border-radius:26px;
+    box-shadow:
+        0 0 28px rgba(212,175,55,.28),
+        0 0 70px rgba(139,105,20,.18),
+        inset 0 1px 0 rgba(255,236,180,.18);
+    animation:fadeUp 1s ease;
 }
 @keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(50px);
+    from{ opacity:0; transform:translateY(46px); }
+    to{ opacity:1; transform:translateY(0); }
 }
-to{
-opacity:1;
-transform:translateY(0);
-}
+.icon-row{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-bottom:14px;
+    font-size:22px;
+    color:#e8c55b;
+    text-shadow:0 0 12px rgba(232,197,91,.55);
 }
 h1{
-color:#d8b4fe;
-font-size:34px;
-margin-bottom:20px;
-text-shadow:0 0 15px rgba(192,132,252,.5);
+    font-family:'Cinzel', serif;
+    color:#f4e2a8;
+    font-size:28px;
+    line-height:1.35;
+    margin-bottom:18px;
+    text-shadow:0 0 18px rgba(212,175,55,.45);
+}
+.gold-line{
+    width:86px;
+    height:2px;
+    margin:0 auto 22px;
+    background:linear-gradient(90deg, transparent, #d4af37, #ffe9a3, #d4af37, transparent);
 }
 p{
-font-size:18px;
-line-height:1.8;
-margin:12px 0;
-color:#eeeeee;
+    font-size:17px;
+    line-height:1.85;
+    margin:10px 0;
+    color:#efe6c9;
 }
-strong{
-color:#c084fc;
-}
+strong{ color:#f0d27a; font-weight:700; }
 .btn{
-display:inline-block;
-margin-top:25px;
-padding:14px 30px;
-border-radius:50px;
-text-decoration:none;
-background:linear-gradient(90deg,#6d28d9,#9333ea);
-color:white;
-font-weight:bold;
-transition:.3s;
-box-shadow:0 0 20px rgba(147,51,234,.5);
+    display:inline-block;
+    margin-top:26px;
+    padding:13px 28px;
+    border-radius:50px;
+    text-decoration:none;
+    background:linear-gradient(90deg,#8a6a1a,#d4af37,#f3d58a,#d4af37,#8a6a1a);
+    background-size:200% 100%;
+    color:#1a1408;
+    font-weight:700;
+    transition:.35s;
+    box-shadow:0 0 22px rgba(212,175,55,.45);
 }
 .btn:hover{
-transform:translateY(-4px) scale(1.05);
-box-shadow:0 0 35px rgba(192,132,252,.8);
+    transform:translateY(-4px) scale(1.04);
+    background-position:100% 0;
+    box-shadow:0 0 36px rgba(255,215,0,.7);
 }
 </style>
 </head>
 <body>
 <div class="stars"></div>
+<div class="molecules"></div>
 <div class="circle c1"></div>
 <div class="circle c2"></div>
-<div class="card">
-<h1>ยินดีต้อนรับสู่โปรไฟล์ของซูปเปอร์ค้าฟ</h1>
-<p>
-สวัสดีครับ! ผมชื่อ <strong>ณัฐนันท์ (Nattanan)</strong>
-</p>
-<p>
-กำลังศึกษาอยู่แผนการเรียน <strong>วิทย์–คณิต Gifted</strong>
-</p>
-<p>
-สนใจด้านการแพทย์ เภสัชศาสตร์ และกระบวนการทางวิทยาศาสตร์
-</p>
-<p>
-นี่คือเว็บไซต์แรกของผมที่สร้างบน GitHub Pages 🚀
-</p>
+<div class="circle c3"></div>
+
+<div class="wrap">
+    <div class="badge">Pharmacy · Science · Future</div>
+    <div class="card">
+        <div class="icon-row">⚕ ❖ ✦</div>
+        <h1>ยินดีต้อนรับสู่โปรไฟล์ของซูปเปอร์ค้าฟ</h1>
+        <div class="gold-line"></div>
+        <p>สวัสดีครับ! ผมชื่อ <strong>ณัฐนันท์ (Nattanan)</strong></p>
+        <p>กำลังศึกษาอยู่แผนการเรียน <strong>วิทย์–คณิต Gifted</strong></p>
+        <p>สนใจด้านการแพทย์ เภสัชศาสตร์ และกระบวนการทางวิทยาศาสตร์</p>
+        <p>นี่คือเว็บไซต์แรกของผมที่สร้างบน GitHub Pages 🚀</p>
+        <a href="portfolio.html" class="btn">ไปหน้าต่อไป →</a>
+    </div>
 </div>
-
-<div style="text-align:center;">
-
-<a href="portfolio.html" class="btn">
-
-ไปหน้าต่อไป ⬅
-
-</a>
-
-</div>
+</body>
+</html>
