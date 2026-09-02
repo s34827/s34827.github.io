@@ -10,80 +10,102 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  min-height:100vh;display:flex;justify-content:center;align-items:center;
-  padding:28px 16px;font-family:'Noto Sans Thai',sans-serif;
+  min-height:100vh;display:flex;justify-content:center;align-items:flex-start;
+  padding:32px 16px 48px;font-family:'Noto Sans Thai',sans-serif;
   background:
-    radial-gradient(circle at 18% 18%, rgba(212,175,55,.22), transparent 28%),
-    radial-gradient(circle at 82% 28%, rgba(184,134,11,.18), transparent 32%),
-    radial-gradient(circle at 50% 88%, rgba(255,215,0,.10), transparent 30%),
+    radial-gradient(circle at 18% 12%, rgba(212,175,55,.2), transparent 28%),
+    radial-gradient(circle at 82% 22%, rgba(184,134,11,.16), transparent 32%),
+    radial-gradient(circle at 50% 90%, rgba(255,215,0,.08), transparent 30%),
     linear-gradient(145deg,#0b0904,#161208,#2a2110,#0b0904);
-  background-size:400% 400%;animation:bgMove 18s ease infinite;color:#f8f1d8;
+  background-attachment:fixed;color:#f8f1d8;
 }
-@keyframes bgMove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-.stars{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#ffe9a3 1px,transparent 1px),radial-gradient(#d4af37 1px,transparent 1px);background-size:70px 70px,110px 110px;opacity:.5;animation:starMove 40s linear infinite;}
-@keyframes starMove{from{transform:translateY(0);}to{transform:translateY(-260px);}}
-.circle{position:absolute;border-radius:50%;background:rgba(212,175,55,.08);border:1px solid rgba(255,215,0,.18);backdrop-filter:blur(18px);animation:float 8s ease-in-out infinite;}
-.c1{width:220px;height:220px;top:6%;left:5%;}
-.c2{width:150px;height:150px;bottom:8%;right:6%;animation-delay:2s;}
-.c3{width:80px;height:80px;top:20%;right:14%;animation-delay:4s;}
-@keyframes float{50%{transform:translateY(-20px);}}
-.wrap{position:relative;z-index:2;width:min(520px,96vw);display:flex;flex-direction:column;align-items:center;}
+.stars{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#ffe9a3 1px,transparent 1px),radial-gradient(#d4af37 1px,transparent 1px);background-size:70px 70px,110px 110px;opacity:.45;}
+.circle{position:fixed;border-radius:50%;background:rgba(212,175,55,.07);border:1px solid rgba(255,215,0,.15);backdrop-filter:blur(16px);pointer-events:none;}
+.c1{width:200px;height:200px;top:5%;left:4%;}
+.c2{width:140px;height:140px;bottom:10%;right:5%;}
+.wrap{position:relative;z-index:2;width:min(560px,96vw);display:flex;flex-direction:column;align-items:center;}
 .badge{margin-bottom:14px;padding:7px 16px;border-radius:999px;border:1px solid rgba(212,175,55,.45);background:rgba(20,16,8,.55);color:#f3d58a;font-size:12px;letter-spacing:.1em;text-transform:uppercase;}
-.card{width:100%;padding:36px 28px 32px;text-align:center;background:linear-gradient(180deg,rgba(40,32,14,.62),rgba(16,13,6,.78));backdrop-filter:blur(22px);border:1px solid rgba(232,197,91,.38);border-radius:26px;box-shadow:0 0 28px rgba(212,175,55,.28),0 0 70px rgba(139,105,20,.18),inset 0 1px 0 rgba(255,236,180,.18);animation:fadeUp 1s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
-.photo-wrap{width:148px;height:148px;margin:0 auto 18px;position:relative;}
+.card{width:100%;padding:34px 26px 30px;text-align:center;background:linear-gradient(180deg,rgba(40,32,14,.65),rgba(16,13,6,.82));backdrop-filter:blur(22px);border:1px solid rgba(232,197,91,.38);border-radius:26px;box-shadow:0 0 28px rgba(212,175,55,.25),0 0 60px rgba(139,105,20,.15),inset 0 1px 0 rgba(255,236,180,.15);}
+.photo-wrap{width:140px;height:140px;margin:0 auto 16px;position:relative;}
 .photo-ring{position:absolute;inset:-7px;border-radius:50%;border:1.5px dashed rgba(232,197,91,.7);animation:spin 26s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.photo-wrap img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:3px solid #1a1408;box-shadow:0 0 0 3px #d4af37,0 0 24px rgba(212,175,55,.45),0 12px 28px rgba(0,0,0,.35);background:#2a2110;}
-.photo-placeholder{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#2a2110,#1a1408);border:3px solid #1a1408;box-shadow:0 0 0 3px #d4af37;color:#c4a35a;font-size:13px;text-align:center;line-height:1.4;}
-.icon-row{display:flex;justify-content:center;gap:16px;margin-bottom:10px;font-size:20px;color:#e8c55b;text-shadow:0 0 12px rgba(232,197,91,.55);}
-h1{font-family:'Cinzel',serif;color:#f4e2a8;font-size:clamp(22px,5vw,28px);line-height:1.35;margin-bottom:8px;text-shadow:0 0 18px rgba(212,175,55,.45);}
-.role{color:#d4af37;font-size:14px;letter-spacing:.06em;margin-bottom:14px;font-weight:500;}
-.gold-line{width:80px;height:2px;margin:0 auto 18px;background:linear-gradient(90deg,transparent,#d4af37,#ffe9a3,#d4af37,transparent);}
-.info{text-align:left;background:rgba(0,0,0,.22);border:1px solid rgba(212,175,55,.22);border-radius:16px;padding:14px 16px;margin:0 0 16px;}
-.info-row{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14.5px;line-height:1.6;}
+.photo-wrap img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:3px solid #1a1408;box-shadow:0 0 0 3px #d4af37,0 0 22px rgba(212,175,55,.4),0 10px 24px rgba(0,0,0,.35);background:#2a2110;}
+.photo-placeholder{width:100%;height:100%;border-radius:50%;display:none;align-items:center;justify-content:center;background:linear-gradient(145deg,#2a2110,#1a1408);border:3px solid #1a1408;box-shadow:0 0 0 3px #d4af37;color:#c4a35a;font-size:13px;text-align:center;line-height:1.4;}
+.icon-row{display:flex;justify-content:center;gap:14px;margin-bottom:8px;font-size:18px;color:#e8c55b;text-shadow:0 0 10px rgba(232,197,91,.5);}
+h1{font-family:'Cinzel',serif;color:#f4e2a8;font-size:clamp(22px,5vw,27px);line-height:1.3;margin-bottom:6px;text-shadow:0 0 16px rgba(212,175,55,.4);}
+.role{color:#d4af37;font-size:13.5px;letter-spacing:.05em;margin-bottom:12px;font-weight:500;}
+.gold-line{width:72px;height:2px;margin:0 auto 18px;background:linear-gradient(90deg,transparent,#d4af37,#ffe9a3,#d4af37,transparent);}
+.block{text-align:left;background:rgba(0,0,0,.22);border:1px solid rgba(212,175,55,.2);border-radius:16px;padding:14px 16px 16px;margin-bottom:14px;}
+.block-title{display:flex;align-items:center;gap:8px;color:#e8c55b;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+.block-title span{flex:1;height:1px;background:linear-gradient(90deg,rgba(212,175,55,.45),transparent);}
+.intro-text{color:#efe6c9;font-size:14.5px;line-height:1.9;white-space:pre-line;}
+.intro-text strong{color:#f0d27a;}
+.info-row{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;line-height:1.65;}
 .info-row:last-child{border-bottom:0;padding-bottom:2px;}
-.info-label{flex:0 0 92px;color:#c4a35a;font-weight:600;font-size:13px;}
+.info-label{flex:0 0 100px;color:#c4a35a;font-weight:600;font-size:13px;}
 .info-value{color:#efe6c9;flex:1;}
 .info-value strong{color:#f0d27a;}
-.quote{font-size:14px;color:#d8c99a;font-style:italic;line-height:1.7;margin:0 0 18px;opacity:.92;}
-.btn{display:inline-block;margin-top:6px;padding:13px 28px;border-radius:50px;text-decoration:none;background:linear-gradient(90deg,#8a6a1a,#d4af37,#f3d58a,#d4af37,#8a6a1a);background-size:200% 100%;color:#1a1408;font-weight:700;transition:.35s;box-shadow:0 0 22px rgba(212,175,55,.45);}
-.btn:hover{transform:translateY(-4px) scale(1.04);background-position:100% 0;box-shadow:0 0 36px rgba(255,215,0,.7);}
-.hint{margin-top:12px;font-size:12px;color:rgba(232,197,91,.65);}
+.quote{font-size:13.5px;color:#d8c99a;font-style:italic;line-height:1.75;margin:4px 0 18px;opacity:.92;}
+.btn{display:inline-block;padding:13px 28px;border-radius:50px;text-decoration:none;background:linear-gradient(90deg,#8a6a1a,#d4af37,#f3d58a,#d4af37,#8a6a1a);background-size:200% 100%;color:#1a1408;font-weight:700;transition:.35s;box-shadow:0 0 20px rgba(212,175,55,.4);}
+.btn:hover{transform:translateY(-3px) scale(1.03);background-position:100% 0;box-shadow:0 0 32px rgba(255,215,0,.65);}
+.hint{margin-top:12px;font-size:12px;color:rgba(232,197,91,.6);}
 </style>
 </head>
 <body>
 <div class="stars"></div>
 <div class="circle c1"></div>
 <div class="circle c2"></div>
-<div class="circle c3"></div>
 
 <div class="wrap">
   <div class="badge">Pharmacy · Science · Portfolio</div>
   <div class="card">
     <div class="photo-wrap">
       <div class="photo-ring"></div>
-      <img src="foredu.jpg" alt="รูปโปรไฟล์ ณัฐนันท์"
+      <img src="foredu.jpg" alt="รูปโปรไฟล์"
            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="photo-placeholder" style="display:none;">ใส่รูป<br>foredu.jpg</div>
+      <div class="photo-placeholder">ใส่รูป<br>foredu.jpg</div>
     </div>
     <div class="icon-row">⚕ ❖ ✦</div>
     <h1>ณัฐนันท์ (Nattanan)</h1>
     <p class="role">นักเรียนแผนวิทย์–คณิต Gifted</p>
     <div class="gold-line"></div>
 
-    <div class="info">
+    <!-- พื้นที่แนะนำตัว — เขียนยาวได้ -->
+    <div class="block">
+      <div class="block-title">แนะนำตัว <span></span></div>
+      <div class="intro-text">สวัสดีครับ ผมชื่อ <strong>ณัฐนันท์</strong>
+
+กำลังศึกษาอยู่ในแผนการเรียนวิทย์–คณิต Gifted และมีความสนใจอย่างมากในด้าน<strong>การแพทย์ เภสัชศาสตร์</strong> และกระบวนการทางวิทยาศาสตร์
+
+ผมเชื่อว่าความรู้ทางวิทยาศาสตร์เมื่อถูกนำไปใช้ด้วยความรับผิดชอบ จะช่วยสร้างประโยชน์ให้กับผู้อื่นได้จริง แฟ้มนี้จัดทำขึ้นเพื่อนำเสนอเส้นทางการเรียนรู้และผลงานของผม</div>
+    </div>
+
+    <!-- ข้อมูลส่วนตัว -->
+    <div class="block">
+      <div class="block-title">ข้อมูลส่วนตัว <span></span></div>
       <div class="info-row">
         <div class="info-label">ชื่อ–นามสกุล</div>
         <div class="info-value"><strong>ณัฐนันท์</strong> (Nattanan)</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">ชื่อเล่น</div>
+        <div class="info-value">ซูปเปอร์ / ซูปเปอร์ค้าฟ</div>
       </div>
       <div class="info-row">
         <div class="info-label">แผนการเรียน</div>
         <div class="info-value">วิทย์–คณิต Gifted</div>
       </div>
       <div class="info-row">
+        <div class="info-label">โรงเรียน</div>
+        <div class="info-value">ใส่ชื่อโรงเรียนตรงนี้</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">ชั้นปี</div>
+        <div class="info-value">ม.6 / ปีการศึกษา 2568–2569</div>
+      </div>
+      <div class="info-row">
         <div class="info-label">ความสนใจ</div>
-        <div class="info-value">การแพทย์ · เภสัชศาสตร์ · วิทยาศาสตร์</div>
+        <div class="info-value">การแพทย์ · เภสัชศาสตร์ · วิทยาศาสตร์การทดลอง</div>
       </div>
       <div class="info-row">
         <div class="info-label">เป้าหมาย</div>
@@ -92,6 +114,10 @@ h1{font-family:'Cinzel',serif;color:#f4e2a8;font-size:clamp(22px,5vw,28px);line-
       <div class="info-row">
         <div class="info-label">ทักษะ</div>
         <div class="info-value">คิดวิเคราะห์ · ทำงานเป็นทีม · HTML/CSS · Python</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">ติดต่อ</div>
+        <div class="info-value">ใส่อีเมลหรือช่องทางติดต่อ (ถ้าต้องการ)</div>
       </div>
     </div>
 
