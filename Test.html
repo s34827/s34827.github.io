@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบงิ้วสามก๊ก: ตอน กวนอูไปรับราชการกับโจโฉ</title>
+    <style>
+        :root {
+            --opera-red: #b80000;
+            --opera-gold: #ffd700;
+            --opera-dark-gold: #c5a000;
+            --opera-black: #111111;
+            --opera-white: #fffdf5;
+            --opera-bg: #1a0000;
+            --correct-color: #2e7d32;
+            --incorrect-color: #c62828;
+        }
+
+        body {
+            font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--opera-bg);
+            background-image: radial-gradient(circle, #330000 0%, #0a0000 100%);
+            color: var(--opera-white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .quiz-container {
+            background-color: #120202;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.25), 0 0 10px rgba(184, 0, 0, 0.5);
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            border: 3px solid var(--opera-gold);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* ตกแต่งสไตล์ซุ้มงิ้วจีน */
+        .quiz-container::before {
+            content: "京劇";
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--opera-red);
+            color: var(--opera-gold);
+            padding: 2px 20px;
+            font-weight: bold;
+            font-size: 18px;
+            border: 2px solid var(--opera-gold);
+            border-radius: 20px;
+            letter-spacing: 4px;
+        }
+
+        .quiz-header {
+            text-align: center;
+            border-bottom: 2px dashed var(--opera-gold);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            margin-top: 10px;
+        }
+
+        .quiz-header h1 {
+            color: var(--opera-gold);
+            margin: 0 0 10px 0;
+            font-size: 26px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .quiz-header p {
+            color: #d1c4e9;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #333;
+            height: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid var(--opera-gold);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--opera-red) 0%, var(--opera-gold) 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--opera-gold);
+        }
+
+        .question-text {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option-btn {
+            background-color: #260505;
+            border: 2px solid #551111;
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-size: 16px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+            font-family: inherit;
+            color: #eee;
+        }
+
+        .option-btn:hover:not([disabled]) {
+            background-color: #420a0a;
+            border-color: var(--opera-gold);
+            color: var(--opera-gold);
+        }
+
+        .option-btn.correct {
+            background-color: #1b3e20 !important;
+            border-color: #4caf50 !important;
+            color: #81c784 !important;
+            font-weight: bold;
+        }
+
+        .option-btn.incorrect {
+            background-color: #4a1212 !important;
+            border-color: #e57373 !important;
+            color: #ef9a9a !important;
+            font-weight: bold;
+        }
+
+        .explanation-box {
+            background-color: #1f0a0a;
+            border-left: 4px solid var(--opera-gold);
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+            display: none;
+            border: 1px solid #3d1414;
+            border-left-width: 4px;
+        }
+
+        .explanation-title {
+            font-weight: bold;
+            color: var(--opera-gold);
+            margin-bottom: 5px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            background: linear-gradient(180deg, var(--opera-red) 0%, #800000 100%);
+            color: var(--opera-gold);
+            border: 2px solid var(--opera-gold);
+            padding: 12px 28px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: all 0.2s;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .btn:hover:not([disabled]) {
+            background: linear-gradient(180deg, #d32f2f 0%, var(--opera-red) 100%);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn:disabled {
+            background: #333;
+            color: #777;
+            border-color: #555;
+            cursor: not-allowed;
+        }
+
+        .result-screen {
+            text-align: center;
+            padding: 20px 0;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 54px;
+            font-weight: bold;
+            color: var(--opera-gold);
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .score-message {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 20px 15px;
+            }
+            .question-text {
+                font-size: 17px;
+            }
+            .option-btn {
+                padding: 12px 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1>🎭 แบบทดสอบงิ้วสามก๊ก: ตอน กวนอูไปรับราชการกับโจโฉ</h1>
+        <p>เปิดม่านทบทวนความรู้วรรณคดี ม.5 (จำนวน 30 ข้อ)</p>
+    </div>
+
+    <div id="quiz-screen">
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="stats-container">
+            <span id="question-count">ฉากที่ 1 / 30</span>
+            <span id="score-tracker">คะแนน: 0</span>
+        </div>
+
+        <div class="question-text" id="question-text">คำถามจะปรากฏ ณ หน้าเวที...</div>
+
+        <div class="options-container" id="options-container">
+            <!-- ตัวเลือกจะถูกสร้างด้วย JS -->
+        </div>
+
+        <div class="explanation-box" id="explanation-box">
+            <div class="explanation-title">📜 เบื้องหลังเวที (คำอธิบาย):</div>
+            <div id="explanation-text">คำอธิบายจะแสดงที่นี่</div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="next-btn" disabled onclick="nextQuestion()">ฉากถัดไป ➔</button>
+        </div>
+    </div>
+
+    <div class="result-screen" id="result-screen">
+        <h2>🎭 ปิดม่านการแสดง 🎭</h2>
+        <div class="score-display" id="final-score">0 / 30</div>
+        <div class="score-message" id="score-message">ข้อความประเมินผลจะแสดงที่นี่</div>
+        <button class="btn" onclick="restartQuiz()">🔄 เริ่มแสดงใหม่อีกครั้ง (Re-take)</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "1. วรรณคดีเรื่อง \"สามก๊ก\" แปลเป็นภาษาไทยเพื่อวัตถุประสงค์หลักใดตามพระราชดำรัสของรัชกาลที่ 1",
+            options: [
+                "ก. เพื่อความบันเทิงและสุนทรียภาพในราชสำนัก",
+                "ข. เพื่อใช้เป็นตำราศึกษาภาษาและวัฒนธรรมจีน",
+                "ค. เพื่อประโยชน์แก่ราชการบ้านเมืองและการสงคราม",
+                "ง. เพื่อเผยแพร่คุณธรรมความซื่อสัตย์แก่ราษฎร"
+            ],
+            correct: 2,
+            explanation: "รัชกาลที่ 1 มีพระราชดำริให้แปลสามก๊กเพื่อใช้เป็นประโยชน์แก่ราชการบ้านเมือง เป็นตำราพิชัยสงคราม และเป็นข้อคิดในการบริหารประเทศ[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)"
+        },
+        {
+            question: "2. ผู้บันทึกจดหมายเหตุสามก๊กฉบับดั้งเดิม (สามก๊กจี่) ในสมัยราชวงศ์จิ้นคือใคร",
+            options: [
+                "ก. ล่อกวนตง",
+                "ข. ตันซิ่ว",
+                "ค. เจ้าพระยาพระคลัง (หน)",
+                "ง. ซุนฮก"
+            ],
+            correct: 1,
+            explanation: "ตันซิ่ว เป็นขุนนางสมัยราชวงศ์จิ้น ผู้บันทึกจดหมายเหตุประวัติศาสตร์ \"สามก๊กจี่\" ก่อนที่ล่อกวนตงจะนำมาแต่งเป็นฉบับนิยาย[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span)"
+        },
+        {
+            question: "3. วรรณคดีสโมสรในสมัยรัชกาลที่ 6 ได้ยกย่องเรื่อง \"สามก๊ก\" ให้เป็นยอดของวรรณคดีประเภทใด",
+            options: [
+                "ก. ยอดของความเรียงนิทาน",
+                "ข. ยอดของนิทานคำกลอน",
+                "ค. ยอดของบทละครร้อง",
+                "ง. ยอดของกลอนเสภา"
+            ],
+            correct: 0,
+            explanation: "วรรณคดีสโมสรยกย่องให้สามก๊กเป็น \"ยอดของวรรณคดีประเภทความเรียงนิทาน\" ด้วยภาษาร้อยแก้วที่สละสลวยคมคาย[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)"
+        },
+        {
+            question: "4. ใครเป็นผู้อำนวยการแปลวรรณคดีเรื่องสามก๊กเป็นภาษาไทยในสมัยรัตนโกสินทร์ตอนต้น",
+            options: [
+                "ก. กรมพระราชวังบวรสถานภิมุข",
+                "ข. สมเด็จพระเจ้าบรมวงศ์เธอ กรมพระยาดำรงราชานุภาพ",
+                "ค. เจ้าพระยาพระคลัง (หน)",
+                "ง. พระบาทสมเด็จพระพุทธยอดฟ้าจุฬาโลกมหาราช"
+            ],
+            correct: 2,
+            explanation: "เจ้าพระยาพระคลัง (หน) ได้รับพระบรมราชโองการให้เป็นผู้อำนวยการแปลสามก๊ก[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)"
+        },
+        {
+            question: "5. ผลงานวรรณคดีข้อใด *ไม่ใช่* ผลงานการแต่งหรือแปลของเจ้าพระยาพระคลัง (หน)",
+            options: [
+                "ก. ราชาธิราช",
+                "ข. กากีคำกลอน",
+                "ค. อิเหนาคำฉันท์",
+                "ง. พระอภัยมณี"
+            ],
+            correct: 3,
+            explanation: "พระอภัยมณี เป็นผลงานประพันธ์ของสุนทรภู่ (ข้อ ก, ข, ค เป็นผลงานของเจ้าพระยาพระคลัง (หน))[span_8](start_span)[span_8](end_span)"
+        },
+        {
+            question: "6. จุดเริ่มต้นของความแตกแยกจนนำไปสู่ยุคสามก๊กเกิดจากเหตุการณ์ใดในปลายสมัยราชวงศ์ฮั่น",
+            options: [
+                "ก. การกบฏของโจรโพกผ้าเหลือง",
+                "ข. การลอบสังหารตั้งโต๊ะ",
+                "ค. การศึกที่ผาแดง (เซ็กเพ็ก)",
+                "ง. การขัดแย้งระหว่างเล่าปี่กับซุนกวน"
+            ],
+            correct: 0,
+            explanation: "การกบฏโจรโพกผ้าเหลืองทำให้พระมหากษัตริย์เสื่อมอำนาจ และเกิดขุนศึกชาติต่างๆ ตั้งตนเป็นใหญ่[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span)"
+        },
+        {
+            question: "7. ก๊กใดที่มีพื้นที่ครอบครองกว้างใหญ่ที่สุด และปกครองโดยโจโฉ",
+            options: [
+                "ก. จ๊กก๊ก (SHU)",
+                "ข. วุยก๊ก (WEI)",
+                "ค. ง่อก๊ก (WU)",
+                "ง. ฮั่นก๊ก"
+            ],
+            correct: 1,
+            explanation: "วุยก๊ก (WEI) ของโจโฉ ปกครองดินแดนทางตอนเหนือและมีพื้นที่กว้างใหญ่ที่สุด[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span)"
+        },
+        {
+            question: "8. เล่าปี่ กวนอู และเตียวหุย แสดงความผูกพันและตั้งสัตย์ปฏิญาณว่าจะตายพร้อมกันที่ใด",
+            options: [
+                "ก. เมืองชีจิ๋ว",
+                "ข. เมืองแห้ฝือ",
+                "ค. สวนดอกท้อ",
+                "ง. ด่านเฮาโลก๋วน"
+            ],
+            correct: 2,
+            explanation: "ทั้งสามร่วมสาบานเป็นพี่น้องกันที่สวนดอกท้อ[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span)"
+        },
+        {
+            question: "9. สาเหตุสำคัญที่ทำให้โจโฉยกทัพมาตีเมืองชีจิ๋วคืออะไร",
+            options: [
+                "ก. ต้องการจับตัวภรรยาของเล่าปี่",
+                "ข. ต้องการกำจัดเล่าปี่ที่กำลังสะสมอำนาจ",
+                "ค. ต้องการแย่งชิงม้าเซ็กเธาว์",
+                "ง. เล่าปี่ไม่ยอมส่งเสบียงให้ราชสำนัก"
+            ],
+            correct: 1,
+            explanation: "โจโฉเกรงว่าเล่าปี่ซึ่งเป็นคนมีสติปัญญาและคุณธรรม หากปล่อยไว้นานไปจะเป็นภัยใหญ่หลวง จึงรีบยกทัพมาตี[span_15](start_span)[span_15](end_span)[span_16](start_span)[span_16](end_span)"
+        },
+        {
+            question: "10. เมื่อเล่าปี่พ่ายแพ้แก่โจโฉในการศึกที่เมืองชีจิ๋ว เล่าปี่ได้หลบหนีไปพึ่งพาใคร",
+            options: [
+                "ก. ซุนกวน",
+                "ข. เล่าเปียว",
+                "ค. อ้วนเสี้ยว",
+                "ง. ขงเบ้ง"
+            ],
+            correct: 2,
+            explanation: "เล่าปี่ตีแตกหนีไปพึ่งพาอ้วนเสี้ยวที่เมืองกิจิ๋ว[span_17](start_span)[span_17](end_span)[span_18](start_span)[span_18](end_span)"
+        },
+        {
+            question: "11. ที่ปรึกษาของโจโฉคนใดที่เป็นผู้ใช้อุบายล่อให้กวนอูออกมานอกเมืองแห้ฝือจนติดล้อม",
+            options: [
+                "ก. กุยแก",
+                "ข. ซุนฮก",
+                "ค. เทียหยก",
+                "ง. เตียวเลี้ยว"
+            ],
+            correct: 2,
+            explanation: "เทียหยก ใช้อุบายใช้ทหารเชลยของกวนอูไปเป็นไส้ศึก และล่อให้กวนอูออกจากเมืองแห้ฝือมาซุ่มยิงล้อมไว้[span_19](start_span)[span_19](end_span)[span_20](start_span)[span_20](end_span)"
+        },
+        {
+            question: "12. เหตุใดเตียวเลี้ยวจึงอาสาเป็นผู้ไปเกลี้ยกล่อมกวนอูให้มารับราชการกับโจโฉ",
+            options: [
+                "ก. เพราะเคยได้รับการช่วยเหลือชีวิตจากกวนอูมาก่อน",
+                "ข. เพราะเป็นเพื่อนสนิทมาตั้งแต่เด็ก",
+                "ค. เพราะต้องการตำแหน่งแม่ทัพใหญ่จากโจโฉ",
+                "ง. เพราะได้รับคำสั่งตรงจากพระเจ้าเหี้ยนเต้"
+            ],
+            correct: 0,
+            explanation: "เตียวเลี้ยวเคยเกือบถูกโจโฉประหาร แต่กวนอูคุกเข่าขอชีวิตไว้ เตียวเลี้ยวจึงทดแทนบุญคุณโดยการไปช่วยพูดกอบกู้สถานการณ์ให้กวนอู[span_21](start_span)[span_21](end_span)[span_22](start_span)[span_22](end_span)"
+        },
+        {
+            question: "13. ข้อใด *ไม่ใช่* \"ความผิด 3 ประการ\" ที่เตียวเลี้ยวยกขึ้นมาเตือนสติกวนอูหากคิดสู้จนตาย",
+            options: [
+                "ก. ผิดต่อคำสาบานพี่น้องในสวนดอกท้อ",
+                "ข. ผิดต่อภารกิจกอบกู้บ้านเมืองของเล่าปี่",
+                "ค. ผิดที่ไม่ยอมดูแลและคุ้มครองครอบครัวของเล่าปี่",
+                "ง. ผิดที่ไม่จงรักภักดีต่อโจโฉซึ่งเป็นมหาอุปราช"
+            ],
+            correct: 3,
+            explanation: "ความผิด 3 ประการคือ: 1. ผิดคำสาบานสวนท้อ 2. ละทิ้งภรรยาเล่าปี่ 3. ละทิ้งภารกิจทำนุบำรุงพระมหากษัตริย์[span_23](start_span)[span_23](end_span)[span_24](start_span)[span_24](end_span)"
+        },
+        {
+            question: "14. สัญญาข้อแรกที่กวนอูยื่นต่อโจโฉก่อนยอมเข้ารับราชการคืออะไร",
+            options: [
+                "ก. ขอเป็นข้าของพระเจ้าเหี้ยนเต้",
+                "ข. ขอไม่ใช้อาวุธรบกับฝ่ายเล่าปี่",
+                "ค. ขอรับเบี้ยหวัดเท่ากับตำแหน่งแม่ทัพใหญ่",
+                "ง. ขอให้โจโฉปล่อยตัวทหารเชลยทั้งหมด"
+            ],
+            correct: 0,
+            explanation: "กวนอูขอเป็นข้าพระเจ้าเหี้ยนเต้ ไม่ใช่ข้าของโจโฉ เพื่อคงไว้ซึ่งยศศักดิ์และความจงรักภักดีต่อแผ่นดิน[span_25](start_span)[span_25](end_span)[span_26](start_span)[span_26](end_span)"
+        },
+        {
+            question: "15. ข้อสัญญาใดของกวนอูที่ทำให้โจโฉเกิดความลังเลใจมากที่สุด",
+            options: [
+                "ก. ขอเป็นข้าพระเจ้าเหี้ยนเต้",
+                "ข. ขอคุ้มครองและดูแลพี่สะใภ้ทั้งสอง",
+                "ค. ถ้ารู้ว่าเล่าปี่อยู่ที่ใดจะไปหาทันที",
+                "ง. ขอนำม้าส่วนตัวเข้าค่ายพัก"
+            ],
+            correct: 2,
+            explanation: "โจโฉลังเลข้อ 3 มากที่สุด เพราะกลัวว่าทำดีเท่าไร หากกวนอูรู้ว่าเล่าปี่อยู่ที่ไหนก็อาจจะหนีไปหาเล่าปี่[span_27](start_span)[span_27](end_span)[span_28](start_span)[span_28](end_span)"
+        },
+        {
+            question: "16. เตียวเลี้ยวนำนิทานโบราณเรื่องใดมาเล่าเพื่อโน้มน้าวให้โจโฉยอมรับเงื่อนไขของกวนอู",
+            options: [
+                "ก. นิทานเบ้งเฮ็ก",
+                "ข. นิทานอิเยียงผู้กตัญญู",
+                "ค. นิทานไซ่ฮั่น",
+                "ง. นิทานจิวยี่"
+            ],
+            correct: 1,
+            explanation: "เตียวเลี้ยวยกเรื่อง \"อิเยียง\" เพื่อชี้ให้เห็นว่า หากผูกใจกวนอูด้วยความดีและความกตัญญู กวนอูก็จะซื่อสัตย์และตอบแทนบุญคุณแน่นอน[span_29](start_span)[span_29](end_span)[span_30](start_span)[span_30](end_span)"
+        },
+        {
+            question: "17. พระเจ้าเหี้ยนเต้ได้พระราชทานฉายาหรือนามใดให้แก่กวนอู",
+            options: [
+                "ก. ฮกหลง",
+                "ข. บีเยียงก๋ง",
+                "ค. ห้าพยัคฆ์ขุนพล",
+                "ง. เทพเจ้าแห่งความซื่อสัตย์"
+            ],
+            correct: 1,
+            explanation: "เมื่อเห็นหนวดของกวนอูงดงาม พระเจ้าเหี้ยนเต้จึงพระราชทานถุงใส่หนวดและเรียกกวนอูว่า \"บีเยียงก๋ง\" (เจ้าหนวดงาม)[span_31](start_span)[span_31](end_span)"
+        },
+        {
+            question: "18. เมื่อโจโฉมอบเสื้อใหม่ให้ กวนอูปปฏิบัติตนอย่างไรจนโจโฉต้องเอ่ยปากสรรเสริญ",
+            options: [
+                "ก. นำเสื้อใหม่ไปมอบให้ภรรยาเล่าปี่",
+                "ข. ใส่เสื้อใหม่ไว้ข้างใน และเอาเสื้อเก่าของเล่าปี่ใส่ไว้ข้างนอก",
+                "ค. คืนเสื้อใหม่เพราะกลัวคนนินทา",
+                "ง. แขวนเสื้อใหม่ไว้ในห้องเพื่อเป็นเกียรติ"
+            ],
+            correct: 1,
+            explanation: "กวนอูสวมเสื้อใหม่ไว้ข้างใน และสวมเสื้อเก่าที่เล่าปี่เคยให้ไว้ข้างนอก โดยให้เหตุผลว่าไม่กล้าลืมของที่เล่าปี่เคยให้[span_32](start_span)[span_32](end_span)"
+        },
+        {
+            question: "19. สิ่งใดที่โจโฉมอบให้แล้วกวนอูถึงกับคุกเข่าคำนับด้วยความยินดีอย่างยิ่ง",
+            options: [
+                "ก. เครื่องเงินเครื่องทอง",
+                "ข. เสื้อแพรอย่างดี",
+                "ค. ม้าเซ็กเธาว์",
+                "ง. ยศตำแหน่งนายทหาร"
+            ],
+            correct: 2,
+            explanation: "กวนอูกระทำคำนับอย่างยินดีเมื่อได้รับ \"ม้าเซ็กเธาว์\" ซึ่งผิดปกติจากการรับของชิ้นอื่น[span_33](start_span)[span_33](end_span)[span_34](start_span)[span_34](end_span)"
+        },
+        {
+            question: "20. เหตุผลจริงที่กวนอูดีใจมากเมื่อได้รับม้าเซ็กเธาว์คืออะไร",
+            options: [
+                "ก. เพราะเป็นม้าที่วิ่งได้วันละพันหลี่และมีราคาสูง",
+                "ข. เพราะจะได้ใช้เดินทางไปหาเล่าปี่ได้เร็วขึ้นเมื่อรู้ข่าว",
+                "ค. เพราะต้องการนำไปใช้อวดขุนนางคนอื่น",
+                "ง. เพราะม้าเดิมของตนบาดเจ็บจากการรบ"
+            ],
+            correct: 1,
+            explanation: "กวนอูดีใจเพราะรู้ว่าม้าเซ็กเธาว์กำลังดีและเดินทางได้วันละพันหลี่ หากรู้ข่าวเล่าปี่เมื่อใดจะเดินทางไปหาได้ในวันเดียว[span_35](start_span)[span_35](end_span)"
+        },
+        {
+            question: "21. โจโฉใช้อุบายใดหวังให้กวนอูแตกหักกับเล่าปี่ในเรื่องเกียรติยศและศีลธรรม",
+            options: [
+                "ก. ให้กวนอูพักร่วมกระโจมเดียวกับภรรยาของเล่าปี่",
+                "ข. ส่งจดหมายปลอมบอกเล่าปี่ว่ากวนอูแปรพักตร์",
+                "ค. ยุยงให้กวนอูตั้งตนเป็นเจ้าเมืองแห้ฝือ",
+                "ง. ปล่อยข่าวว่าเล่าปี่เสียชีวิตแล้ว"
+            ],
+            correct: 0,
+            explanation: "โจโฉจัดให้กวนอูนอนห้องเดียวกับพี่สะใภ้ทั้งสอง หวังให้เกิดความผิดทางศีลธรรมเพื่อลายความน่าเชื่อถือของกวนอู[span_36](start_span)[span_36](end_span)"
+        },
+        {
+            question: "22. กวนอูปฏิบัติตนอย่างไรเพื่อป้องกันข้อครหาเมื่อต้องพักในกระโจมเดียวกับพี่สะใภ้",
+            options: [
+                "ก. นอนหลับอยู่ด้านนอกกระโจม",
+                "ข. ยืนกุมง้าวรักษาการณ์หน้ากระโจมตลอดคืน",
+                "ค. จุดไฟอ่านหนังสืออยู่นอกค่าย",
+                "ง. สั่งให้ทหารเลวมาเฝ้าแทนตน"
+            ],
+            correct: 1,
+            explanation: "กวนอูถือเทียนและยืนกุมง้าวรักษาความปลอดภัยอยู่หน้าห้องพี่สะใภ้ตลอดทั้งคืนจนรุ่งเช้า[span_37](start_span)[span_37](end_span)"
+        },
+        {
+            question: "23. ซุนฮกแนะนำกลยุทธ์ใดแก่โจโฉเพื่อเหนี่ยวรั้งไม่ให้กวนอูเดินทางจากไป",
+            options: [
+                "ก. ไม่ให้กวนอูออกรบ เพราะหากยังไม่มีความชอบ กวนอูจะยังไม่ไป",
+                "ข. ยึดม้าเซ็กเธาว์คืนเมื่อกวนอูจะออกเดินทาง",
+                "ค. ส่งคนไปขัดขวางไม่ให้กวนอูติดต่อกับเล่าปี่",
+                "ง. มอบทรัพย์สินเพิ่มเป็นสองเท่าทุกสามวัน"
+            ],
+            correct: 0,
+            explanation: "ซุนฮกแนะว่ากวนอูเป็นคนกตัญญู ถ้ารังแต่ให้ของโดยกวนอูยังไม่ได้สร้างความชอบ กวนอูจะไม่ยอมไปแน่ ดังนั้นอย่าให้กวนอูออกรบ[span_38](start_span)[span_38](end_span)"
+        },
+        {
+            question: "24. แม่ทัพเอกของอ้วนเสี้ยวคนใดที่ถูกกวนอูฟันคอขาดในการรบที่ด่านแปะแบ๊",
+            options: [
+                "ก. บุนทิว",
+                "ข. งันเหลียง",
+                "ค. ลิโป้",
+                "ง. แฮหัวตุ้น"
+            ],
+            correct: 1,
+            explanation: "กวนอูอาสารบและตัดหัว \"งันเหลียง\" แม่ทัพเอกของอ้วนเสี้ยวได้สำเร็จเพื่อแทนคุณโจโฉ[span_39](start_span)[span_39](end_span)"
+        },
+        {
+            question: "25. กวนอูกระทำสิ่งใดก่อนเดินทางออกจากโจโฉเพื่อไปหาเล่าปี่",
+            options: [
+                "ก. ลาโจโฉและคืนสิ่งของทรัพย์สินทั้งหมด",
+                "ข. เผาค่ายพักของตนเอง",
+                "ค. สังหารแม่ทัพโจโฉเพื่อเปิดทาง",
+                "ง. ยึดเสบียงอาหารไปใช้ระหว่างเดินทาง"
+            ],
+            correct: 0,
+            explanation: "กวนอูเขียนจดหมายลา ผูกตราประจำตำแหน่งไว้ และแขวนสิ่งของเงินทองทั้งหมดคืนไว้ในค่าย[span_40](start_span)[span_40](end_span)"
+        },
+        {
+            question: "26. ในตอนท้าย โจโฉขี่ม้าตามมากวนอูทันเพื่อมอบสิ่งใดให้เป็นของระลึก",
+            options: [
+                "ก. กระบี่ประจำตำแหน่ง",
+                "ข. เสื้อ",
+                "ค. ม้าตัวใหม่",
+                "ง. ทองคำ 100 ตำลึง"
+            ],
+            correct: 1,
+            explanation: "โจโฉมอบ \"เสื้อแพร\" ให้กวนอูเป็นของระลึกก่อนจากกัน[span_41](start_span)[span_41](end_span)"
+        },
+        {
+            question: "27. กวนอูกระทำสิ่งใดขณะรับของระลึกจากโจโฉ ซึ่งแสดงถึงความระมัดระวังทางการทหาร",
+            options: [
+                "ก. คุกเข่ารับบนพื้นดิน",
+                "ข. ไม่ลงจากหลังม้า แต่ใช้อาวุธ (ง้าว) รับเสื้อ",
+                "ค. ให้ทหารเลวเป็นผู้รับแทน",
+                "ง. รับด้วยมือข้างเดียวขณะขี่ม้า"
+            ],
+            correct: 1,
+            explanation: "กวนอูเอามือง้าวรับเสื้อโดยไม่ลงจากม้า เพื่อป้องกันการซุ่มโจมตีหรืออุบายของฝ่ายโจโฉ[span_42](start_span)[span_42](end_span)"
+        },
+        {
+            question: "28. คำว่า \"ทหารเลว\" ในสำนวนภาษาสามก๊กหมายถึงสิ่งใด",
+            options: [
+                "ก. ทหารที่มีพฤติกรรมชั่วร้าย",
+                "ข. พลทหารชั้นผู้น้อย",
+                "ค. ทหารที่ทรยศต่อหน้าที่",
+                "ง. ทหารที่ไร้ฝีมือในการรบ"
+            ],
+            correct: 1,
+            explanation: "คำว่า \"เลว\" ในภาษาโบราณบริบทนี้หมายถึง สามัญ ชั้นราบ หรือชั้นผู้น้อย (พลทหาร)[span_43](start_span)[span_43](end_span)"
+        },
+        {
+            question: "29. สำนวนเปรียบเทียบ \"อันความตายอุปมาเหมือนนอนหลับ\" ของกวนอู สะท้อนแนวคิดใด",
+            options: [
+                "ก. มองว่าความตายเป็นเรื่องปกติธรรมดา ไม่น่าหวาดกลัว",
+                "ข. มองว่าการรบทำให้เหน็ดเหนื่อยจนอยากพักผ่อน",
+                "ค. ความตายทำให้หลุดพ้นจากภาระหน้าที่",
+                "ง. การนอนหลับมีความเสี่ยงเท่ากับความตาย"
+            ],
+            correct: 0,
+            explanation: "เป็นการเปรียบเทียบว่าความตายเป็นเรื่องธรรมชาติธรรมดา ไร้ความเกรงกลัวหากทำตามสัจจะ[span_44](start_span)[span_44](end_span)"
+        },
+        {
+            question: "30. ฉายาที่ ยาขอบ (โชติ แพร่พันธุ์) ตั้งให้แก่กวนอูคืออะไร",
+            options: [
+                "ก. ผู้ไม่ยอมให้โลกทรยศ",
+                "ข. เทพเจ้าแห่งความซื่อสัตย์",
+                "ค. นายกตลอดกาล",
+                "ง. ผู้ถ่มน้ำลายรดฟ้า"
+            ],
+            correct: 1,
+            explanation: "ยาขอบ ผู้แต่งสามก๊กฉบับวนิพก ตั้งฉายากวนอูว่า \"เทพเจ้าแห่งความซื่อสัตย์\[span_45](start_span)"[span_45](end_span)"
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedOption = null;
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById('question-text').innerText = q.question;
+        document.getElementById('question-count').innerText = `ฉากที่ ${currentQuestion + 1} / ${questions.length}`;
+        document.getElementById('progress-bar').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+        
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+
+        q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt;
+            btn.onclick = () => selectOption(index);
+            optionsContainer.appendChild(btn);
+        });
+
+        document.getElementById('explanation-box').style.display = 'none';
+        document.getElementById('next-btn').disabled = true;
+        selectedOption = null;
+    }
+
+    function selectOption(index) {
+        if (selectedOption !== null) return;
+        selectedOption = index;
+
+        const q = questions[currentQuestion];
+        const buttons = document.querySelectorAll('.option-btn');
+
+        buttons.forEach((btn, idx) => {
+            btn.disabled = true;
+            if (idx === q.correct) {
+                btn.classList.add('correct');
+            }
+            if (idx === index && index !== q.correct) {
+                btn.classList.add('incorrect');
+            }
+        });
+
+        if (index === q.correct) {
+            score++;
+            document.getElementById('score-tracker').innerText = `คะแนน: ${score}`;
+        }
+
+        document.getElementById('explanation-text').innerText = q.explanation;
+        document.getElementById('explanation-box').style.display = 'block';
+        document.getElementById('next-btn').disabled = false;
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        document.getElementById('final-score').innerText = `${score} / ${questions.length}`;
+
+        let message = '';
+        const percentage = (score / questions.length) * 100;
+
+        if (percentage >= 80) {
+            message = "👏 ยอดเยี่ยมยิ่งนัก! สติปัญญาล้ำเลิศดั่งกุนซือใหญ่ เสียงปรบมือดังสนั่นทั่วโรงงิ้ว!";
+        } else if (percentage >= 60) {
+            message = "👍 ฝีมือไม่เลวเลย! มีความรู้ความเข้าใจในกลศึกอย่างแม่นยำ ทบทวนอีกนิดจักสมบูรณ์แบบ";
+        } else {
+            message = "🎺 อย่าเพิ่งท้อแท้! ลองศึกษากลยุทธ์เพิ่มอีกนิด แล้วกลับมาร่วมแสดงฉากนี้ใหม่อีกครั้ง";
+        }
+
+        document.getElementById('score-message').innerText = message;
+    }
+
+    function restartQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        document.getElementById('score-tracker').innerText = `คะแนน: 0`;
+        document.getElementById('result-screen').style.display = 'none';
+        document.getElementById('quiz-screen').style.display = 'block';
+        loadQuestion();
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
